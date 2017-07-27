@@ -45,6 +45,10 @@ class Settings implements ISettings {
 			'enforceNumericCharacters' => $this->config->getEnforceNumericCharacters(),
 			'enforceSpecialCharacters' => $this->config->getEnforceSpecialCharacters(),
 			'enforceHaveIBeenPwned' => $this->config->getEnforceHaveIBeenPwned(),
+            'expirationDays' => $this->config->getExpirationDays(),
+            'expirationMailDaysBefore' => $this->config->getExpirationMailDaysBefore(),
+            'nextcloudHost' => $this->config->getNextcloudHost(),
+            'excludeGroups' => $this->config->getExcludeGroups(),
 		]);
 
 		return $response;

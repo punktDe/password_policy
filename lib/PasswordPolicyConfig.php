@@ -116,6 +116,47 @@ class PasswordPolicyConfig {
 		return $enforceSpecialCharacters === '1';
 	}
 
+    /**
+     * get the days until an password expires
+     *
+     * @return int
+     */
+    public function getExpirationDays() {
+        $expirationDays = $this->config->getAppValue('password_policy', 'expirationDays', '0');
+        return (int)$expirationDays;
+    }
+
+    /**
+     * how many days before password expiration should the notification email be send
+     *
+     * @return int
+     */
+    public function getExpirationMailDaysBefore() {
+        $expirationMailDaysBefore = $this->config->getAppValue('password_policy', 'expirationMailDaysBefore', '0');
+        return (int)$expirationMailDaysBefore;
+    }
+
+    /**
+     * get the nextcloud host
+     *
+     * @return string
+     */
+    public function getNextcloudHost() {
+        $nextcloudHost = $this->config->getAppValue('password_policy', 'nextcloudHost', '');
+        return $nextcloudHost;
+    }
+
+    /**
+     * get the excluded groups
+     *
+     * @return string
+     */
+    public function getExcludeGroups() {
+        $excludeGroups = $this->config->getAppValue('password_policy', 'excludeGroups', '');
+        $excludeGroups = implode('|', json_decode($excludeGroups, true));
+        return $excludeGroups;
+    }
+
 	/**
 	 * set minimal length of passwords
 	 *
@@ -177,4 +218,39 @@ class PasswordPolicyConfig {
 		$this->config->setAppValue('password_policy', 'enforceHaveIBeenPwned', $enforceHaveIBeenPwned ? '1' : '0');
 	}
 
+    /**
+     * set the days until an password expires
+     *
+     * @param int $expirationDays
+     */
+    public function setExpirationDays($expirationDays) {
+        $this->config->setAppValue('password_policy', 'expirationDays', $expirationDays);
+    }
+
+    /**
+     * set the days until an password expires
+     *
+     * @param int $expirationDays
+     */
+    public function setExpirationMailDaysBefore($expirationMailDaysBefore) {
+        $this->config->setAppValue('password_policy', 'expirationMailDaysBefore', $expirationMailDaysBefore);
+    }
+
+    /**
+     * set nextcloud host
+     *
+     * @param $nextcloudHost
+     */
+    public function setNextcloudHost($nextcloudHost) {
+        $this->config->setAppValue('password_policy', 'nextcloudHost', $nextcloudHost);
+    }
+
+    /**
+     * set the excluded groups
+     *
+     * @param $excludeGroups
+     */
+    public function setExcludeGroups($excludeGroups) {
+        $this->config->setAppValue('password_policy', 'ExcludeGroups', $excludeGroups);
+    }
 }

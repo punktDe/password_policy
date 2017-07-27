@@ -62,5 +62,28 @@ style('password_policy', 'settings-admin');
 	</p>
 	<p class="password-policy-settings-hint">
 		<?php p($l->t('This check creates a hash of the password and sends the first 5 characters of this hash to the haveibeenpwned.com API to retrieve a list of all hashes that start with those. Then it checks on the Nextcloud instance if the password hash is in the result set.'));?>
+    </p>
+
+	<p>
+		<label>
+			<span><?php p($l->t('Period of password validity (days, 0 = disable)')) ?></span>
+			<input id="password-policy-expiration-days" type="number" value="<?php p($_['expirationDays']) ?>" />
+		</label>
+	</p>
+	<p>
+		<label>
+			<span><?php p($l->t('Send notification mail before expiration (days, 0 = disable)')) ?></span>
+			<input id="password-policy-expiration-mail-days-before" type="number" value="<?php p($_['expirationMailDaysBefore']) ?>" />
+		</label>
+	</p>
+	<p>
+		<label>
+			<span><?php p($l->t('Nextcloud host')) ?></span>
+			<input id="password-policy-nextcloud-host" type="text" value="<?php p($_['nextcloudHost']) ?>" />
+		</label>
+	</p>
+	<p>
+		<label for="exclude-groups"><?php p($l->t('Exclude groups from password expiration')) ?></label>
+		<input type="hidden" name="exclude-groups" class="exclude-groups" value="<?php p($_['excludeGroups']) ?>" style="width: 320px;" />
 	</p>
 </div>

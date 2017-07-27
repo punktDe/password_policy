@@ -21,3 +21,4 @@ declare(strict_types=1);
  */
 
 $app = new \OCA\Password_Policy\AppInfo\Application();
+$app->register();

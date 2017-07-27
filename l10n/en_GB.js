@@ -17,6 +17,19 @@ OC.L10N.register(
     "Enforce special characters" : "Enforce special characters",
     "Check password against the list of breached passwords from haveibeenpwned.com" : "Check password against the list of breached passwords from haveibeenpwned.com",
     "This check creates a hash of the password and sends the first 5 characters of this hash to the haveibeenpwned.com API to retrieve a list of all hashes that start with those. Then it checks on the Nextcloud instance if the password hash is in the result set." : "This check creates a hash of the password and sends the first 5 characters of this hash to the haveibeenpwned.com API to retrieve a list of all hashes that start with those. Then it checks on the Nextcloud instance if the password hash is in the result set.",
-    "Check password against the list of breached passwords from haveibeenpwnd.com" : "Check password against the list of breached passwords from haveibeenpwnd.com"
-},
+    "Check password against the list of breached passwords from haveibeenpwnd.com" : "Check password against the list of breached passwords from haveibeenpwnd.com",
+    "Password need to be at least %s characters long" : "Password need to be at least %s characters long",
+    "Password need to contain at least one lower case character and one upper case character." : "Password need to contain at least one lower case character and one upper case character.",
+    "Password need to contain at least one numeric character." : "Password need to contain at least one numeric character.",
+    "Password need to contain at least one special character." : "Password need to contain at least one special character.",
+    "Password is within the 1,000,000 most common passwords. Please choose another one." : "Password is within the 1,000,000 most common passwords. Please choose another one.",
+    "Period of password validity (days, 0 = disable)" : "Period of password validity (days, 0 = disable)",
+    "Send notification mail before expiration (days, 0 = disable)" : "Send notification mail before expiration (days, 0 = disable)",
+    "Your password is about to expire." : "Your password is about to expire.",
+    "Hello %s," : "Hello %s,",
+	"Your password is about to expire on %s." : "Your password is about to expire on %s.",
+	"Please login to your account and change your password:" : "Please login to your account and change your password:",
+	"Nextcloud host" : "Nextcloud host",
+    "Exclude groups from password expiration" : "Exclude groups from password expiration"
+    },
 "nplurals=2; plural=(n != 1);");
