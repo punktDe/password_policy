@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2016 Bjoern Schiessle <bjoern@schiessle.org>
  *
@@ -24,6 +25,7 @@ namespace OCA\Password_Policy;
 
 
 use OC\HintException;
+use OCP\Http\Client\IClientService;
 use OCP\IL10N;
 
 class PasswordValidator {
@@ -34,15 +36,22 @@ class PasswordValidator {
 	/** @var IL10N */
 	private $l;
 
+	/** @var IClientService */
+	private $clientService;
+
 	/**
 	 * PasswordValidator constructor.
 	 *
 	 * @param PasswordPolicyConfig $config
 	 * @param IL10N $l
+	 * @param IClientService $clientService
 	 */
-	public function __construct(PasswordPolicyConfig $config, IL10N $l) {
+	public function __construct(PasswordPolicyConfig $config,
+								IL10N $l,
+								IClientService $clientService) {
 		$this->config = $config;
 		$this->l = $l;
+		$this->clientService = $clientService;
 	}
 
 	/**
@@ -57,6 +66,7 @@ class PasswordValidator {
 		$this->checkNumericCharacters($password);
 		$this->checkUpperLowerCase($password);
 		$this->checkSpecialCharacters($password);
+		$this->checkHaveIBeenPwned($password);
 	}
 
 	/**
@@ -151,6 +161,44 @@ class PasswordValidator {
 					);
 					throw new HintException($message, $message_t);
 				}
+			}
+		}
+	}
+
+	/**
+	 * Check if a password is in the list of breached passwords from
+	 * haveibeenpwned.com
+	 *
+	 * @param string $password
+	 * @throws HintException
+	 */
+	protected function checkHaveIBeenPwned($password) {
+		if ($this->config->getEnforceHaveIBeenPwned()) {
+			$hash = sha1($password);
+			$range = substr($hash, 0, 5);
+			$needle = strtoupper(substr($hash, 5));
+
+			$client = $this->clientService->newClient();
+
+			try {
+				$response = $client->get(
+					'https://api.pwnedpasswords.com/range/' . $range,
+					[
+						'timeout' => 5
+					]
+				);
+			} catch (\Exception $e) {
+				return;
+			}
+
+			$result = $response->getBody();
+
+			if (strpos($result, $needle) !== false) {
+				$message = 'Password is present in compromised password list. Please choose a different password.';
+				$message_t = $this->l->t(
+					'Password is present in compromised password list. Please choose a different password.'
+				);
+				throw new HintException($message, $message_t);
 			}
 		}
 	}
