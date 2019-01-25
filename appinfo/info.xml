@@ -23,5 +23,6 @@
 
 	<background-jobs>
 		<job>OCA\Password_Policy\BackgroundJobs\NotifyUserTask</job>
+		<job>OCA\Password_Policy\BackgroundJobs\DisableUserTask</job>
 	</background-jobs>
 </info>
