@@ -23,7 +23,7 @@ class UserHooks {
 
         $result = $userDAO->updateUserExpirationData($fields);
 
-        if ($result != 1) {
+        if ($result != 1  AND $result != 2) {
             throw new HintException("Writing expiration data failed for user " . $params['uid'],"An error occured (1501483501). Please contact your administrator.");
         }
     }
