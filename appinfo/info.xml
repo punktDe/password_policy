@@ -14,7 +14,7 @@
 	<category>security</category>
 	<bugs>https://github.com/nextcloud/password_policy/issues</bugs>
 	<dependencies>
-		<nextcloud min-version="16" max-version="16" />
+		<nextcloud min-version="18" max-version="18" />
 	</dependencies>
 
 	<settings>
